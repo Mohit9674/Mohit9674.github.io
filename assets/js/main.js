@@ -1,5 +1,5 @@
+// Theme Toggle
 document.addEventListener('DOMContentLoaded', function() {
-  // Theme Toggle
   const themeToggle = document.getElementById('theme-toggle');
   const html = document.documentElement;
   
@@ -20,62 +20,110 @@ document.addEventListener('DOMContentLoaded', function() {
     localStorage.setItem('theme', newTheme);
   });
   
-  // GitHub Calendar with error handling
-  if (document.getElementById('calendar')) {
-    try {
-      GitHubCalendar('#calendar', 'Mohit9674', { 
-        responsive: true, 
-        tooltips: true,
-        global_stats: false,
-        cache: 86400000 // 1 day
-      }).then(() => {
-        console.log('GitHub calendar loaded successfully');
-      }).catch(error => {
-        console.error('GitHub calendar error:', error);
-        showCalendarError();
-      });
-    } catch (error) {
-      console.error('GitHub calendar initialization error:', error);
-      showCalendarError();
+  // Initialize Particles.js
+  particlesJS('particles', {
+    particles: {
+      number: { value: 80, density: { enable: true, value_area: 800 } },
+      color: { value: "#0dcaf0" },
+      shape: { type: "circle" },
+      opacity: { value: 0.5, random: true },
+      size: { value: 3, random: true },
+      line_linked: {
+        enable: true,
+        distance: 150,
+        color: "#0dcaf0",
+        opacity: 0.3,
+        width: 1
+      },
+      move: {
+        enable: true,
+        speed: 2,
+        direction: "none",
+        random: true,
+        straight: false,
+        out_mode: "out",
+        bounce: false
+      }
+    },
+    interactivity: {
+      detect_on: "canvas",
+      events: {
+        onhover: { enable: true, mode: "repulse" },
+        onclick: { enable: true, mode: "push" },
+        resize: true
+      }
     }
+  });
+  
+  // GitHub Calendar
+  if (document.getElementById('calendar')) {
+    GitHubCalendar('#calendar', 'Mohit9674', { 
+      responsive: true, 
+      tooltips: true,
+      global_stats: false,
+      cache: 86400000 // 1 day
+    }).then(r => {});
   }
   
-  function showCalendarError() {
-    const calendarContainer = document.getElementById('calendar');
-    if (calendarContainer) {
-      calendarContainer.innerHTML = `
-        <div class="alert alert-warning">
-          <i class="fas fa-exclamation-triangle me-2"></i>
-          Could not load contribution data. 
-          <a href="https://github.com/Mohit9674" target="_blank" class="alert-link">View my GitHub profile</a>
-        </div>
-      `;
-    }
+  // Contributions Chart
+  if (document.getElementById('contribChart')) {
+    const ctx = document.getElementById('contribChart').getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [{
+          label: 'Commits',
+          data: [12, 19, 8, 15, 22, 17, 24, 12, 19, 22, 18, 14],
+          backgroundColor: 'rgba(13, 202, 240, 0.7)',
+          borderColor: 'rgba(13, 202, 240, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(255, 255, 255, 0.1)'
+            },
+            ticks: {
+              color: '#e0e0e0'
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: '#e0e0e0'
+            }
+          }
+        }
+      }
+    });
   }
   
   // Back to top button
   const backToTopBtn = document.querySelector('.btn-back-to-top');
   
   window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-      navbar.classList.add('scrolled');
-      if (backToTopBtn) {
-        backToTopBtn.style.display = 'block';
-      }
+    if (window.pageYOffset > 300) {
+      backToTopBtn.style.display = 'block';
     } else {
-      navbar.classList.remove('scrolled');
-      if (backToTopBtn) {
-        backToTopBtn.style.display = 'none';
-      }
+      backToTopBtn.style.display = 'none';
     }
   });
   
-  if (backToTopBtn) {
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
   
   // Smooth scrolling for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -89,5 +137,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       }
     });
+  });
+  
+  // Navbar scroll effect
+  window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+      navbar.classList.add('shadow');
+    } else {
+      navbar.classList.remove('shadow');
+    }
   });
 });

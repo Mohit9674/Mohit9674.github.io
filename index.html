@@ -11,10 +11,10 @@
   <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <!-- Animated Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="index.html">
+      <a class="navbar-brand glow" href="index.html">
         <i class="fas fa-code me-2"></i>Mohit Notani
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
@@ -28,21 +28,22 @@
           <li class="nav-item"><a class="nav-link" href="#activity">Activity</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
-        <button class="btn btn-sm btn-outline-light ms-2" id="theme-toggle">
+        <button class="btn btn-sm btn-outline-info ms-2" id="theme-toggle">
           <i class="fas fa-moon"></i>
         </button>
       </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- Animated Hero Section -->
   <section id="home" class="hero d-flex align-items-center">
     <div class="container text-center position-relative z-1">
+      <div class="particles" id="particles"></div>
       <div class="hero-content">
-        <h1 class="display-4 fw-bold mb-3">Mohit Notani</h1>
+        <h1 class="display-4 fw-bold mb-3 text-gradient">Mohit Notani</h1>
         <p class="lead mb-4">Sentiment Analysis Expert | Python • AWS • Automation Testing | Data Engineer</p>
         <div class="d-flex justify-content-center gap-3">
-          <a href="#projects" class="btn btn-primary btn-lg px-4">
+          <a href="#projects" class="btn btn-primary btn-lg px-4 glow-hover">
             <i class="fas fa-laptop-code me-2"></i>View My Work
           </a>
           <a href="#contact" class="btn btn-outline-light btn-lg px-4">
@@ -59,7 +60,7 @@
   </section>
 
   <!-- About Section -->
-  <section id="about" class="py-5">
+  <section id="about" class="py-5 bg-dark2">
     <div class="container">
       <div class="text-center mb-5">
         <h2 class="section-title">About Me</h2>
@@ -68,9 +69,9 @@
       
       <div class="row g-5">
         <div class="col-lg-6">
-          <div class="card border-0 shadow">
+          <div class="card border-0 shadow-lg">
             <div class="card-body p-4">
-              <h3 class="card-title mb-4"><i class="fas fa-user-graduate me-2 text-primary"></i>Education</h3>
+              <h3 class="card-title mb-4"><i class="fas fa-user-graduate me-2 text-info"></i>Education</h3>
               <div class="timeline">
                 <div class="timeline-item">
                   <div class="timeline-content">
@@ -90,9 +91,9 @@
         </div>
         
         <div class="col-lg-6">
-          <div class="card border-0 shadow">
+          <div class="card border-0 shadow-lg">
             <div class="card-body p-4">
-              <h3 class="card-title mb-4"><i class="fas fa-laptop-code me-2 text-primary"></i>Skills</h3>
+              <h3 class="card-title mb-4"><i class="fas fa-laptop-code me-2 text-info"></i>Skills</h3>
               <div class="row">
                 <div class="col-md-6">
                   <ul class="skill-list">
@@ -116,17 +117,17 @@
         </div>
       </div>
       
-      <div class="card border-0 shadow mt-4">
+      <div class="card border-0 shadow-lg mt-4">
         <div class="card-body p-4">
-          <h3 class="card-title mb-4"><i class="fas fa-stars me-2 text-primary"></i>Professional Summary</h3>
-          <p>I'm an MSc Data Analytics candidate passionate about transforming raw data into strategic insights. With nearly three years of experience in AWS-based pipelines, CI/CD automation, and ML & NLP, I build scalable, reliable solutions that drive business impact.</p>
+          <h3 class="card-title mb-4"><i class="fas fa-stars me-2 text-info"></i>Professional Summary</h3>
+          <p class="lead">I'm an MSc Data Analytics candidate passionate about transforming raw data into strategic insights. With nearly three years of experience in AWS-based pipelines, CI/CD automation, and ML & NLP, I build scalable, reliable solutions that drive business impact.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Projects Section -->
-  <section id="projects" class="py-5">
+  <section id="projects" class="py-5 bg-dark">
     <div class="container">
       <div class="text-center mb-5">
         <h2 class="section-title">Projects</h2>
@@ -136,72 +137,78 @@
       <div class="row g-4">
         <!-- Project 1 -->
         <div class="col-md-6 col-lg-4">
-          <div class="card h-100 border-0 shadow">
-            <div class="card-header">
+          <div class="card h-100 border-0 shadow project-card">
+            <div class="card-header bg-dark2">
               <h5 class="mb-0">Multi-Model Temporal Analysis of Soccer Matches</h5>
-              <small class="text-muted">Apr 2025</small>
+              <small class="text-info">Apr 2025</small>
             </div>
             <div class="card-body">
-              <ul class="project-details">
+              <ul>
                 <li>Benchmarked CALF, Transformer, TCN & CNN-LSTM on SoccerNet-v2</li>
                 <li>Preprocessed ResNet-152 features with Gaussian label smoothing</li>
                 <li>Evaluated mAP across tolerances; orchestrated DAG pipelines</li>
               </ul>
             </div>
-            <div class="card-footer">
-              <span class="badge bg-primary me-1">PyTorch</span>
-              <span class="badge bg-primary">DAG Pipelines</span>
+            <div class="card-footer bg-dark2">
+              <span class="badge bg-info me-1">PyTorch</span>
+              <span class="badge bg-info">DAG Pipelines</span>
             </div>
           </div>
         </div>
         
         <!-- Project 2 -->
         <div class="col-md-6 col-lg-4">
-          <div class="card h-100 border-0 shadow">
-            <div class="card-header">
+          <div class="card h-100 border-0 shadow project-card">
+            <div class="card-header bg-dark2">
               <h5 class="mb-0">Impact of Weather on NYC Taxi Data</h5>
-              <small class="text-muted">Apr 2025</small>
+              <small class="text-info">Apr 2025</small>
             </div>
             <div class="card-body">
-              <ul class="project-details">
+              <ul>
                 <li>Merged taxi Parquet with NOAA CSV via Apache Spark</li>
                 <li>Partitioned & indexed PostgreSQL for fast queries</li>
                 <li>Visualized in Streamlit & Plotly; orchestrated with Dagster</li>
               </ul>
             </div>
-            <div class="card-footer">
-              <span class="badge bg-primary me-1">Apache Spark</span>
-              <span class="badge bg-primary">Dagster</span>
+            <div class="card-footer bg-dark2">
+              <span class="badge bg-info me-1">Apache Spark</span>
+              <span class="badge bg-info">Dagster</span>
             </div>
           </div>
         </div>
         
         <!-- Project 3 -->
         <div class="col-md-6 col-lg-4">
-          <div class="card h-100 border-0 shadow">
-            <div class="card-header">
+          <div class="card h-100 border-0 shadow project-card">
+            <div class="card-header bg-dark2">
               <h5 class="mb-0">Real-Time Bus Tracker Dublin</h5>
-              <small class="text-muted">Oct 2024 – Dec 2024</small>
+              <small class="text-info">Oct 2024 – Dec 2024</small>
             </div>
             <div class="card-body">
-              <ul class="project-details">
+              <ul>
                 <li>Developed real-time transport monitoring system</li>
                 <li>Utilized PostgreSQL/MongoDB storage and Dagster orchestration</li>
                 <li>Implemented ML delay prediction with MLflow</li>
               </ul>
             </div>
-            <div class="card-footer">
-              <span class="badge bg-primary me-1">Docker</span>
-              <span class="badge bg-primary">Kafka</span>
+            <div class="card-footer bg-dark2">
+              <span class="badge bg-info me-1">Docker</span>
+              <span class="badge bg-info">Kafka</span>
             </div>
           </div>
         </div>
+      </div>
+      
+      <div class="text-center mt-5">
+        <a href="#" class="btn btn-outline-light">
+          <i class="fas fa-book-open me-2"></i>View All Projects
+        </a>
       </div>
     </div>
   </section>
 
   <!-- Activity Section -->
-  <section id="activity" class="py-5">
+  <section id="activity" class="py-5 bg-dark2">
     <div class="container">
       <div class="text-center mb-5">
         <h2 class="section-title">Development Activity</h2>
@@ -209,17 +216,24 @@
       </div>
       
       <div class="row g-4">
-        <div class="col-lg-8 mx-auto">
-          <div class="card border-0 shadow mb-4">
-            <div class="card-header">
+        <div class="col-lg-6">
+          <div class="card border-0 shadow">
+            <div class="card-header bg-dark">
               <h5 class="mb-0"><i class="fab fa-github me-2"></i>GitHub Contribution Calendar</h5>
             </div>
             <div class="card-body">
-              <div id="calendar" class="calendar-container"></div>
-              <div class="text-muted mt-2 small">
-                <i class="fas fa-info-circle me-1"></i>Private repository contributions are shown below
-              </div>
-              <div id="private-contribs" class="mt-3"></div>
+              <div id="calendar" class="mb-4"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-6">
+          <div class="card border-0 shadow">
+            <div class="card-header bg-dark">
+              <h5 class="mb-0"><i class="fas fa-chart-line me-2"></i>Contribution Statistics</h5>
+            </div>
+            <div class="card-body">
+              <canvas id="contribChart" height="250"></canvas>
             </div>
           </div>
         </div>
@@ -228,7 +242,7 @@
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="py-5">
+  <section id="contact" class="py-5 bg-dark">
     <div class="container">
       <div class="text-center mb-5">
         <h2 class="section-title">Get In Touch</h2>
@@ -239,9 +253,17 @@
         <div class="col-md-8 col-lg-6">
           <div class="card border-0 shadow">
             <div class="card-body p-4">
-              <div class="contact-info">
+              <div class="text-center mb-4">
+                <div class="avatar mx-auto mb-3">
+                  <i class="fas fa-user fa-3x"></i>
+                </div>
+                <h4>Let's Connect!</h4>
+                <p class="text-muted">Feel free to reach out for collaborations or opportunities</p>
+              </div>
+              
+              <div class="contact-info mb-4">
                 <div class="d-flex align-items-center mb-3">
-                  <div class="icon-circle bg-primary me-3">
+                  <div class="icon-circle bg-info me-3">
                     <i class="fas fa-envelope text-white"></i>
                   </div>
                   <div>
@@ -251,7 +273,7 @@
                 </div>
                 
                 <div class="d-flex align-items-center mb-3">
-                  <div class="icon-circle bg-primary me-3">
+                  <div class="icon-circle bg-info me-3">
                     <i class="fab fa-linkedin-in text-white"></i>
                   </div>
                   <div>
@@ -261,7 +283,7 @@
                 </div>
                 
                 <div class="d-flex align-items-center">
-                  <div class="icon-circle bg-primary me-3">
+                  <div class="icon-circle bg-info me-3">
                     <i class="fab fa-github text-white"></i>
                   </div>
                   <div>
@@ -270,6 +292,19 @@
                   </div>
                 </div>
               </div>
+              
+              <form>
+                <div class="mb-3">
+                  <input type="text" class="form-control bg-dark2 border-0" placeholder="Name">
+                </div>
+                <div class="mb-3">
+                  <input type="email" class="form-control bg-dark2 border-0" placeholder="Email">
+                </div>
+                <div class="mb-3">
+                  <textarea class="form-control bg-dark2 border-0" rows="4" placeholder="Message"></textarea>
+                </div>
+                <button type="submit" class="btn btn-info w-100">Send Message</button>
+              </form>
             </div>
           </div>
         </div>
@@ -278,7 +313,7 @@
   </section>
 
   <!-- Footer -->
-  <footer class="py-4">
+  <footer class="bg-dark2 text-light py-4">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-6 text-center text-md-start">
@@ -286,8 +321,10 @@
         </div>
         <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
           <div class="social-icons">
-            <a href="https://www.linkedin.com/in/mohit-notani-1a5a1a1b8/" class="me-3"><i class="fab fa-linkedin-in fa-lg"></i></a>
-            <a href="https://github.com/Mohit9674" class="me-3"><i class="fab fa-github fa-lg"></i></a>
+            <a href="#" class="text-light me-3"><i class="fab fa-linkedin-in fa-lg"></i></a>
+            <a href="#" class="text-light me-3"><i class="fab fa-github fa-lg"></i></a>
+            <a href="#" class="text-light me-3"><i class="fab fa-twitter fa-lg"></i></a>
+            <a href="#" class="text-light"><i class="fab fa-medium-m fa-lg"></i></a>
           </div>
         </div>
       </div>
@@ -295,14 +332,18 @@
   </footer>
 
   <!-- Back to top button -->
-  <a href="#home" class="btn btn-primary btn-back-to-top">
+  <a href="#home" class="btn btn-info btn-back-to-top">
     <i class="fas fa-arrow-up"></i>
   </a>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- GitHub Calendar -->
   <script src="https://unpkg.com/github-calendar/dist/github-calendar.min.js"></script>
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <!-- Main JS -->
   <script src="assets/js/main.js"></script>
 </body>
