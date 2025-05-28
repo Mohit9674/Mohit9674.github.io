@@ -1,308 +1,953 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mohit Notani | Data Engineer & Sentiment Analysis Expert</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="assets/css/style.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohit Notani | Data Engineer & Sentiment Analysis Expert</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #4e89e5;
+            --primary-dark: #3a6fc0;
+            --dark: #0f111a;
+            --dark2: #1a1e2d;
+            --text: #e0e0e0;
+            --text-secondary: #a0aec0;
+            --accent: #ff6b6b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--accent);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: inline-block;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #2d3a5c, transparent);
+            margin: 40px auto;
+            max-width: 800px;
+        }
+        
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 17, 26, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 30px;
+        }
+        
+        .nav-link {
+            color: var(--text);
+            font-weight: 500;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        #particles-js {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding-top: 80px;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #4e89e5, #8f94fb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            color: var(--text-secondary);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 10px 20px rgba(78, 137, 229, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background: #3a6fc0;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(78, 137, 229, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+        
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .card {
+            background: var(--dark2);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card-header {
+            background: rgba(78, 137, 229, 0.1);
+            padding: 20px;
+            border-bottom: 1px solid #2d3a5c;
+        }
+        
+        .card-header h3 {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+        }
+        
+        .card-header i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 5px;
+            top: 5px;
+            height: calc(100% - 10px);
+            width: 2px;
+            background: var(--primary);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-left: 20px;
+        }
+        
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -8px;
+            top: 8px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--primary);
+        }
+        
+        .timeline-content h5 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-content p {
+            color: var(--text-secondary);
+        }
+        
+        .skill-list {
+            list-style: none;
+        }
+        
+        .skill-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #2d3a5c;
+            display: flex;
+            align-items: center;
+        }
+        
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .skill-list i {
+            width: 25px;
+            color: var(--primary);
+            margin-right: 10px;
+        }
+        
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .project-card {
+            height: 100%;
+        }
+        
+        .project-card .card-footer {
+            padding: 15px 25px;
+            background: rgba(78, 137, 229, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .badge {
+            padding: 8px 15px;
+            background: rgba(78, 137, 229, 0.2);
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .project-details {
+            list-style: none;
+        }
+        
+        .project-details li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .project-details li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+        
+        /* Contact Section */
+        .contact-card {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-info {
+            padding: 0;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 20px 25px;
+            border-bottom: 1px solid #2d3a5c;
+        }
+        
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+        
+        .icon-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(78, 137, 229, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+        
+        .contact-text h6 {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark2);
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .social-icons a {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Back to top */
+        .btn-back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: none;
+            z-index: 1000;
+            background: var(--primary);
+            color: white;
+            border: none;
+            box-shadow: 0 5px 15px rgba(78, 137, 229, 0.4);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(78, 137, 229, 0.6);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--dark);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 40px;
+                transition: all 0.3s ease;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-item {
+                margin: 15px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">
-        <i class="fas fa-code me-2"></i>Mohit Notani
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navMenu">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-          <li class="nav-item"><a class="nav-link" href="#activity">Activity</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-        </ul>
-        <button class="btn btn-sm btn-outline-light ms-2" id="theme-toggle">
-          <i class="fas fa-moon"></i>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero Section with Particles -->
-  <section id="home" class="hero d-flex align-items-center">
-    <div id="particles-js"></div>
-    <div class="container text-center position-relative z-1">
-      <div class="hero-content">
-        <h1 class="display-4 fw-bold mb-3">Mohit Notani</h1>
-        <p class="lead mb-4">Sentiment Analysis Expert | Python • AWS • Automation Testing | Data Engineer</p>
-        <div class="d-flex justify-content-center gap-3">
-          <a href="#projects" class="btn btn-primary btn-lg px-4">
-            <i class="fas fa-laptop-code me-2"></i>View My Work
-          </a>
-          <a href="#contact" class="btn btn-outline-light btn-lg px-4">
-            <i class="fas fa-envelope me-2"></i>Contact Me
-          </a>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="navbar-brand">
+                <i class="fas fa-code"></i>Mohit Notani
+            </a>
+            <button class="mobile-toggle" id="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
         </div>
-      </div>
-      <div class="scroll-down mt-5">
-        <a href="#about" class="text-white">
-          <i class="fas fa-chevron-down fa-2x bounce"></i>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div id="particles-js"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Mohit Notani</h1>
+                <p>Sentiment Analysis Expert | Python • AWS • Automation Testing | Data Engineer</p>
+                <div>
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-outline">Contact Me</a>
+                </div>
+            </div>
+        </div>
+        <a href="#about" class="scroll-down">
+            <i class="fas fa-chevron-down fa-2x"></i>
         </a>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- About Section -->
-  <section id="about" class="py-5">
-    <div class="container">
-      <div class="text-center mb-5">
-        <h2 class="section-title">About Me</h2>
-        <div class="divider"></div>
-      </div>
-      
-      <div class="row g-5">
-        <div class="col-lg-6">
-          <div class="card border-0 shadow">
-            <div class="card-body p-4">
-              <h3 class="card-title mb-4"><i class="fas fa-user-graduate me-2 text-primary"></i>Education</h3>
-              <div class="timeline">
-                <div class="timeline-item">
-                  <div class="timeline-content">
-                    <h5>MSc Data Analytics</h5>
-                    <p class="text-muted">National College of Ireland (2023–Present)</p>
-                  </div>
-                </div>
-                <div class="timeline-item">
-                  <div class="timeline-content">
-                    <h5>B.E. Information Science & Engineering</h5>
-                    <p class="text-muted">AMC Engineering College (2017–2021)</p>
-                  </div>
-                </div>
-              </div>
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
             </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-6">
-          <div class="card border-0 shadow">
-            <div class="card-body p-4">
-              <h3 class="card-title mb-4"><i class="fas fa-laptop-code me-2 text-primary"></i>Skills</h3>
-              <div class="row">
-                <div class="col-md-6">
-                  <ul class="skill-list">
-                    <li><i class="fab fa-aws me-2"></i>AWS (S3, Glue, CloudFormation)</li>
-                    <li><i class="fab fa-python me-2"></i>Python (NumPy, pandas, scikit-learn)</li>
-                    <li><i class="fas fa-cogs me-2"></i>CI/CD (Jenkins, Docker)</li>
-                    <li><i class="fas fa-robot me-2"></i>Test Automation (Robot Framework, Selenium)</li>
-                  </ul>
-                </div>
-                <div class="col-md-6">
-                  <ul class="skill-list">
-                    <li><i class="fas fa-brain me-2"></i>NLP & Sentiment Analysis</li>
-                    <li><i class="fas fa-database me-2"></i>Apache Spark & Big Data</li>
-                    <li><i class="fas fa-server me-2"></i>Databases (PostgreSQL, MongoDB)</li>
-                    <li><i class="fas fa-network-wired me-2"></i>Orchestration (Dagster, Airflow)</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="card border-0 shadow mt-4">
-        <div class="card-body p-4">
-          <h3 class="card-title mb-4"><i class="fas fa-stars me-2 text-primary"></i>Professional Summary</h3>
-          <p>I'm an MSc Data Analytics candidate passionate about transforming raw data into strategic insights. With nearly three years of experience in AWS-based pipelines, CI/CD automation, and ML & NLP, I build scalable, reliable solutions that drive business impact.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects Section -->
-  <section id="projects" class="py-5">
-    <div class="container">
-      <div class="text-center mb-5">
-        <h2 class="section-title">Projects</h2>
-        <div class="divider"></div>
-      </div>
-      
-      <div class="row g-4">
-        <!-- Project 1 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="card h-100 border-0 shadow">
-            <div class="card-header">
-              <h5 class="mb-0">Multi-Model Temporal Analysis of Soccer Matches</h5>
-              <small class="text-muted">Apr 2025</small>
-            </div>
-            <div class="card-body">
-              <ul class="project-details">
-                <li>Benchmarked CALF, Transformer, TCN & CNN-LSTM on SoccerNet-v2</li>
-                <li>Preprocessed ResNet-152 features with Gaussian label smoothing</li>
-                <li>Evaluated mAP across tolerances; orchestrated DAG pipelines</li>
-              </ul>
-            </div>
-            <div class="card-footer">
-              <span class="badge bg-primary me-1">PyTorch</span>
-              <span class="badge bg-primary">DAG Pipelines</span>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Project 2 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="card h-100 border-0 shadow">
-            <div class="card-header">
-              <h5 class="mb-0">Impact of Weather on NYC Taxi Data</h5>
-              <small class="text-muted">Apr 2025</small>
-            </div>
-            <div class="card-body">
-              <ul class="project-details">
-                <li>Merged taxi Parquet with NOAA CSV via Apache Spark</li>
-                <li>Partitioned & indexed PostgreSQL for fast queries</li>
-                <li>Visualized in Streamlit & Plotly; orchestrated with Dagster</li>
-              </ul>
-            </div>
-            <div class="card-footer">
-              <span class="badge bg-primary me-1">Apache Spark</span>
-              <span class="badge bg-primary">Dagster</span>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Project 3 -->
-        <div class="col-md-6 col-lg-4">
-          <div class="card h-100 border-0 shadow">
-            <div class="card-header">
-              <h5 class="mb-0">Real-Time Bus Tracker Dublin</h5>
-              <small class="text-muted">Oct 2024 – Dec 2024</small>
-            </div>
-            <div class="card-body">
-              <ul class="project-details">
-                <li>Developed real-time transport monitoring system</li>
-                <li>Utilized PostgreSQL/MongoDB storage and Dagster orchestration</li>
-                <li>Implemented ML delay prediction with MLflow</li>
-              </ul>
-            </div>
-            <div class="card-footer">
-              <span class="badge bg-primary me-1">Docker</span>
-              <span class="badge bg-primary">Kafka</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Activity Section -->
-  <section id="activity" class="py-5">
-    <div class="container">
-      <div class="text-center mb-5">
-        <h2 class="section-title">Development Activity</h2>
-        <div class="divider"></div>
-      </div>
-      
-      <div class="row g-4">
-        <div class="col-lg-8 mx-auto">
-          <div class="card border-0 shadow mb-4">
-            <div class="card-header">
-              <h5 class="mb-0"><i class="fab fa-github me-2"></i>GitHub Contribution Calendar</h5>
-            </div>
-            <div class="card-body">
-              <div id="calendar" class="calendar-container"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="py-5">
-    <div class="container">
-      <div class="text-center mb-5">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="divider"></div>
-      </div>
-      
-      <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
-          <div class="card border-0 shadow">
-            <div class="card-body p-4">
-              <div class="contact-info">
-                <div class="d-flex align-items-center mb-3">
-                  <div class="icon-circle bg-primary me-3">
-                    <i class="fas fa-envelope text-white"></i>
-                  </div>
-                  <div>
-                    <h6 class="mb-0">Email</h6>
-                    <a href="mailto:mohitnotani52@gmail.com">mohitnotani52@gmail.com</a>
-                  </div>
+            
+            <div class="about-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-user-graduate"></i>Education</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <h5>MSc Data Analytics</h5>
+                                    <p class="text-muted">National College of Ireland (2023–Present)</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <h5>B.E. Information Science & Engineering</h5>
+                                    <p class="text-muted">AMC Engineering College (2017–2021)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="d-flex align-items-center mb-3">
-                  <div class="icon-circle bg-primary me-3">
-                    <i class="fab fa-linkedin-in text-white"></i>
-                  </div>
-                  <div>
-                    <h6 class="mb-0">LinkedIn</h6>
-                    <a href="https://www.linkedin.com/in/mohit-notani-1a5a1a1b8/">Mohit Notani</a>
-                  </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-laptop-code"></i>Skills</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="skill-list">
+                                    <li><i class="fab fa-aws"></i>AWS (S3, Glue, CloudFormation)</li>
+                                    <li><i class="fab fa-python"></i>Python (NumPy, pandas, scikit-learn)</li>
+                                    <li><i class="fas fa-cogs"></i>CI/CD (Jenkins, Docker)</li>
+                                    <li><i class="fas fa-robot"></i>Test Automation (Robot Framework, Selenium)</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="skill-list">
+                                    <li><i class="fas fa-brain"></i>NLP & Sentiment Analysis</li>
+                                    <li><i class="fas fa-database"></i>Apache Spark & Big Data</li>
+                                    <li><i class="fas fa-server"></i>Databases (PostgreSQL, MongoDB)</li>
+                                    <li><i class="fas fa-network-wired"></i>Orchestration (Dagster, Airflow)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-stars"></i>Professional Summary</h3>
+                </div>
+                <div class="card-body">
+                    <p>I'm an MSc Data Analytics candidate passionate about transforming raw data into strategic insights. With nearly three years of experience in AWS-based pipelines, CI/CD automation, and ML & NLP, I build scalable, reliable solutions that drive business impact.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" style="background-color: var(--dark2);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Projects</h2>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="card project-card">
+                    <div class="card-header">
+                        <h3>Multi-Model Temporal Analysis of Soccer Matches</h3>
+                        <small>Apr 2025</small>
+                    </div>
+                    <div class="card-body">
+                        <ul class="project-details">
+                            <li>Benchmarked CALF, Transformer, TCN & CNN-LSTM on SoccerNet-v2</li>
+                            <li>Preprocessed ResNet-152 features with Gaussian label smoothing</li>
+                            <li>Evaluated mAP across tolerances; orchestrated DAG pipelines</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge">PyTorch</span>
+                        <span class="badge">DAG Pipelines</span>
+                    </div>
                 </div>
                 
-                <div class="d-flex align-items-center">
-                  <div class="icon-circle bg-primary me-3">
-                    <i class="fab fa-github text-white"></i>
-                  </div>
-                  <div>
-                    <h6 class="mb-0">GitHub</h6>
-                    <a href="https://github.com/Mohit9674">Mohit9674</a>
-                  </div>
+                <!-- Project 2 -->
+                <div class="card project-card">
+                    <div class="card-header">
+                        <h3>Impact of Weather on NYC Taxi Data</h3>
+                        <small>Apr 2025</small>
+                    </div>
+                    <div class="card-body">
+                        <ul class="project-details">
+                            <li>Merged taxi Parquet with NOAA CSV via Apache Spark</li>
+                            <li>Partitioned & indexed PostgreSQL for fast queries</li>
+                            <li>Visualized in Streamlit & Plotly; orchestrated with Dagster</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge">Apache Spark</span>
+                        <span class="badge">Dagster</span>
+                    </div>
                 </div>
-              </div>
+                
+                <!-- Project 3 -->
+                <div class="card project-card">
+                    <div class="card-header">
+                        <h3>Real-Time Bus Tracker Dublin</h3>
+                        <small>Oct 2024 – Dec 2024</small>
+                    </div>
+                    <div class="card-body">
+                        <ul class="project-details">
+                            <li>Developed real-time transport monitoring system</li>
+                            <li>Utilized PostgreSQL/MongoDB storage and Dagster orchestration</li>
+                            <li>Implemented ML delay prediction with MLflow</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge">Docker</span>
+                        <span class="badge">Kafka</span>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer -->
-  <footer class="py-4">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-md-6 text-center text-md-start">
-          <p class="mb-0">&copy; 2025 Mohit Notani. All rights reserved.</p>
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+            </div>
+            
+            <div class="card contact-card">
+                <div class="card-body contact-info">
+                    <div class="contact-item">
+                        <div class="icon-circle">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h6>Email</h6>
+                            <a href="mailto:mohitnotani52@gmail.com">mohitnotani52@gmail.com</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="icon-circle">
+                            <i class="fab fa-linkedin-in"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h6>LinkedIn</h6>
+                            <a href="https://www.linkedin.com/in/mohit-notani-1a5a1a1b8/">Mohit Notani</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="icon-circle">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h6>GitHub</h6>
+                            <a href="https://github.com/Mohit9674">Mohit9674</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
-          <div class="social-icons">
-            <a href="https://www.linkedin.com/in/mohit-notani-1a5a1a1b8/" class="me-3"><i class="fab fa-linkedin-in fa-lg"></i></a>
-            <a href="https://github.com/Mohit9674" class="me-3"><i class="fab fa-github fa-lg"></i></a>
-          </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-medium-m"></i></a>
+            </div>
+            <p class="copyright">&copy; 2025 Mohit Notani. All rights reserved.</p>
         </div>
-      </div>
-    </div>
-  </footer>
+    </footer>
 
-  <!-- Back to top button -->
-  <a href="#home" class="btn btn-primary btn-back-to-top">
-    <i class="fas fa-arrow-up"></i>
-  </a>
+    <!-- Back to top button -->
+    <button class="btn-back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-  <!-- Particles.js -->
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- GitHub Calendar -->
-  <script src="https://unpkg.com/github-calendar/dist/github-calendar.min.js"></script>
-  <!-- Main JS -->
-  <script src="assets/js/main.js"></script>
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <script>
+        // Initialize Particles.js
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: "#4e89e5"
+                },
+                shape: {
+                    type: "circle",
+                    stroke: {
+                        width: 0,
+                        color: "#000000"
+                    }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 2,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#4e89e5",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 1,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "grab"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Mobile Menu Toggle
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileToggle.innerHTML = navMenu.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Back to top button
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.style.display = 'flex';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
