@@ -4,22 +4,48 @@
   --primary-dark: #3a6fc0;  /* Darker blue */
   --dark: #1a1d24;          /* Deep charcoal */
   --dark2: #252a33;         /* Slightly lighter charcoal */
-  --light: #e8eaed;         /* Soft off-white */
-  --text: #e0e0e0;          /* Light text */
+  --light: #f8f9fa;         /* Light background */
+  --light-text: #333;       /* Dark text for light mode */
+  --light-card: #ffffff;    /* Card background for light mode */
+  --light-border: #e0e0e0;  /* Border for light mode */
+  --text: #e0e0e0;          /* Light text for dark mode */
   --text-secondary: #a0aec0;/* Secondary text */
-  --card-bg: #252a33;       /* Card background */
-  --border: #3a4251;        /* Border color */
+  --card-bg: #252a33;       /* Card background for dark mode */
+  --border: #3a4251;        /* Border color for dark mode */
 }
 
 [data-bs-theme="dark"] {
   --bs-body-color: var(--text);
   --bs-body-bg: var(--dark);
   --bs-border-color: var(--border);
+  --card-bg-color: var(--card-bg);
+  --card-border-color: var(--border);
+  --text-color: var(--text);
+  --section-bg: transparent;
+  --divider-color: var(--border);
+}
+
+[data-bs-theme="light"] {
+  --bs-body-color: var(--light-text);
+  --bs-body-bg: var(--light);
+  --bs-border-color: var(--light-border);
+  --card-bg-color: var(--light-card);
+  --card-border-color: var(--light-border);
+  --text-color: var(--light-text);
+  --section-bg: #f0f2f5;
+  --divider-color: var(--light-border);
+}
+
+/* Base styles */
+body {
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 /* Backgrounds */
-.bg-dark2 {
-  background-color: var(--dark2);
+.bg-section {
+  background-color: var(--section-bg);
 }
 
 /* Navbar */
@@ -28,6 +54,12 @@
   backdrop-filter: blur(10px);
   padding: 0.8rem 0;
   transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+[data-bs-theme="light"] .navbar {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .navbar.scrolled {
@@ -43,27 +75,37 @@
   padding-top: 80px;
 }
 
+[data-bs-theme="light"] .hero {
+  background: linear-gradient(135deg, #4e89e5 0%, #6ba3ff 100%);
+}
+
+.hero h1, .hero .lead {
+  color: white;
+}
+
+[data-bs-theme="light"] .hero .btn-outline-light {
+  color: #333;
+  border-color: #333;
+}
+
+[data-bs-theme="light"] .hero .btn-outline-light:hover {
+  background-color: #333;
+  color: white;
+}
+
+/* Particles container */
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
 .hero-content {
   position: relative;
-  z-index: 2;
-}
-
-/* Scroll down animation */
-.scroll-down {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.bounce {
-  animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-  40% {transform: translateY(-20px);}
-  60% {transform: translateY(-10px);}
+  z-index: 1;
 }
 
 /* Section Titles */
@@ -71,7 +113,7 @@
   position: relative;
   display: inline-block;
   padding-bottom: 15px;
-  color: var(--text);
+  color: var(--text-color);
 }
 
 .section-title::after {
@@ -87,7 +129,7 @@
 
 .divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  background: linear-gradient(90deg, transparent, var(--divider-color), transparent);
   margin: 20px auto 30px;
   max-width: 800px;
 }
@@ -96,30 +138,38 @@
 .card {
   border-radius: 8px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background-color: var(--card-bg);
-  border: 1px solid var(--border);
+  background-color: var(--card-bg-color);
+  border: 1px solid var(--card-border-color);
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .card-header {
-  background-color: rgba(37, 42, 51, 0.7);
-  border-bottom: 1px solid var(--border);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--card-border-color);
   padding: 1.25rem;
+}
+
+[data-bs-theme="light"] .card-header {
+  background-color: rgba(0, 0, 0, 0.03);
 }
 
 .card-body {
   padding: 1.5rem;
-  color: var(--text);
+  color: var(--text-color);
 }
 
 .card-footer {
-  background-color: rgba(37, 42, 51, 0.7);
-  border-top: 1px solid var(--border);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--card-border-color);
   padding: 1rem 1.5rem;
+}
+
+[data-bs-theme="light"] .card-footer {
+  background-color: rgba(0, 0, 0, 0.03);
 }
 
 /* Timeline */
@@ -162,8 +212,8 @@
 
 .skill-list li {
   padding: 10px 0;
-  border-bottom: 1px solid var(--border);
-  color: var(--text);
+  border-bottom: 1px solid var(--card-border-color);
+  color: var(--text-color);
 }
 
 .skill-list li:last-child {
@@ -178,11 +228,11 @@
 /* Project Details */
 .project-details {
   padding-left: 1.5rem;
+  color: var(--text-color);
 }
 
 .project-details li {
   margin-bottom: 0.5rem;
-  color: var(--text);
 }
 
 /* Contact */
@@ -202,11 +252,17 @@
 }
 
 /* Calendar tooltip styling */
-.ContributionCalendar-day[data-level="0"] { fill: #1e2836 !important; }
-.ContributionCalendar-day[data-level="1"] { fill: #2d4a6e !important; }
-.ContributionCalendar-day[data-level="2"] { fill: #3a6fc0 !important; }
+.ContributionCalendar-day[data-level="0"] { fill: var(--card-bg-color) !important; }
+.ContributionCalendar-day[data-level="1"] { fill: #c6e6ff !important; }
+.ContributionCalendar-day[data-level="2"] { fill: #7cc0ff !important; }
 .ContributionCalendar-day[data-level="3"] { fill: #4e89e5 !important; }
-.ContributionCalendar-day[data-level="4"] { fill: #6ba3ff !important; }
+.ContributionCalendar-day[data-level="4"] { fill: #3a6fc0 !important; }
+
+[data-bs-theme="dark"] .ContributionCalendar-day[data-level="0"] { fill: #1e2836 !important; }
+[data-bs-theme="dark"] .ContributionCalendar-day[data-level="1"] { fill: #2d4a6e !important; }
+[data-bs-theme="dark"] .ContributionCalendar-day[data-level="2"] { fill: #3a6fc0 !important; }
+[data-bs-theme="dark"] .ContributionCalendar-day[data-level="3"] { fill: #4e89e5 !important; }
+[data-bs-theme="dark"] .ContributionCalendar-day[data-level="4"] { fill: #6ba3ff !important; }
 
 /* Back to top */
 .btn-back-to-top {
@@ -243,4 +299,23 @@
 .badge {
   font-weight: 500;
   padding: 0.5em 0.8em;
+}
+
+/* Scroll down animation */
+.scroll-down {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.bounce {
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-20px);}
+  60% {transform: translateY(-10px);}
 }

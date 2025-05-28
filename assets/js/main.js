@@ -1,4 +1,94 @@
 document.addEventListener('DOMContentLoaded', function() {
+  // Initialize Particles.js
+  particlesJS('particles-js', {
+    particles: {
+      number: {
+        value: 80,
+        density: {
+          enable: true,
+          value_area: 800
+        }
+      },
+      color: {
+        value: "#4e89e5"
+      },
+      shape: {
+        type: "circle",
+        stroke: {
+          width: 0,
+          color: "#000000"
+        }
+      },
+      opacity: {
+        value: 0.5,
+        random: true,
+        anim: {
+          enable: true,
+          speed: 1,
+          opacity_min: 0.1,
+          sync: false
+        }
+      },
+      size: {
+        value: 3,
+        random: true,
+        anim: {
+          enable: true,
+          speed: 2,
+          size_min: 0.1,
+          sync: false
+        }
+      },
+      line_linked: {
+        enable: true,
+        distance: 150,
+        color: "#4e89e5",
+        opacity: 0.4,
+        width: 1
+      },
+      move: {
+        enable: true,
+        speed: 1,
+        direction: "none",
+        random: true,
+        straight: false,
+        out_mode: "out",
+        bounce: false,
+        attract: {
+          enable: false,
+          rotateX: 600,
+          rotateY: 1200
+        }
+      }
+    },
+    interactivity: {
+      detect_on: "canvas",
+      events: {
+        onhover: {
+          enable: true,
+          mode: "grab"
+        },
+        onclick: {
+          enable: true,
+          mode: "push"
+        },
+        resize: true
+      },
+      modes: {
+        grab: {
+          distance: 140,
+          line_linked: {
+            opacity: 1
+          }
+        },
+        push: {
+          particles_nb: 4
+        }
+      }
+    },
+    retina_detect: true
+  });
+
   // Theme Toggle
   const themeToggle = document.getElementById('theme-toggle');
   const html = document.documentElement;
@@ -8,6 +98,13 @@ document.addEventListener('DOMContentLoaded', function() {
   if (savedTheme) {
     html.setAttribute('data-bs-theme', savedTheme);
     themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+  } else {
+    // Set default based on system preference
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const defaultTheme = prefersDark ? 'dark' : 'light';
+    html.setAttribute('data-bs-theme', defaultTheme);
+    themeToggle.innerHTML = defaultTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    localStorage.setItem('theme', defaultTheme);
   }
   
   // Toggle theme
@@ -18,41 +115,22 @@ document.addEventListener('DOMContentLoaded', function() {
     html.setAttribute('data-bs-theme', newTheme);
     themeToggle.innerHTML = newTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
     localStorage.setItem('theme', newTheme);
+    
+    // Update particles color based on theme
+    const particles = window.pJSDom[0].pJS;
+    particles.particles.color.value = newTheme === 'dark' ? "#4e89e5" : "#3a6fc0";
+    particles.particles.line_linked.color = newTheme === 'dark' ? "#4e89e5" : "#3a6fc0";
+    particles.fn.particlesRefresh();
   });
-  
-  // GitHub Calendar with error handling
-  if (document.getElementById('calendar')) {
-    try {
-      GitHubCalendar('#calendar', 'Mohit9674', { 
-        responsive: true, 
-        tooltips: true,
-        global_stats: false,
-        cache: 86400000 // 1 day
-      }).then(() => {
-        console.log('GitHub calendar loaded successfully');
-      }).catch(error => {
-        console.error('GitHub calendar error:', error);
-        showCalendarError();
-      });
-    } catch (error) {
-      console.error('GitHub calendar initialization error:', error);
-      showCalendarError();
-    }
-  }
-  
-  function showCalendarError() {
-    const calendarContainer = document.getElementById('calendar');
-    if (calendarContainer) {
-      calendarContainer.innerHTML = `
-        <div class="alert alert-warning">
-          <i class="fas fa-exclamation-triangle me-2"></i>
-          Could not load contribution data. 
-          <a href="https://github.com/Mohit9674" target="_blank" class="alert-link">View my GitHub profile</a>
-        </div>
-      `;
-    }
-  }
-  
+
+  // Initialize GitHub Calendar
+  GitHubCalendar('#calendar', 'Mohit9674', { 
+    responsive: true, 
+    tooltips: true,
+    global_stats: false,
+    cache: 86400000 // 1 day
+  }).then(r => {}).catch(err => console.error('GitHub Calendar error:', err));
+
   // Back to top button
   const backToTopBtn = document.querySelector('.btn-back-to-top');
   
