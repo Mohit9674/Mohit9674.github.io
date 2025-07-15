@@ -9,10 +9,6 @@
 </div>
 
 <!-- Profile Counter -->
-<p align="center">
-  <img src="https://profile-counter.glitch.me/{CemRoot}/count.svg" alt="CemRoot :: Visitor's Count" />
-</p>
-<!-- HEADER SECTION END -->
 
 <!-- SOCIAL LINKS SECTION START -->
 <!-- Sosyal medya başlangıç --> 
